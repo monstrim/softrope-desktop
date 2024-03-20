@@ -282,15 +282,7 @@
   -->
   <Import Project="SubsetFont.targets" />
   <Target Name="BeforeBuild" Condition="'$(Configuration)'=='Release'">
-    <Message Text="Committing." />
-    <SvnCommit Message="message" Targets="@(CodeFiles)" UserName="iain" Password="marlboro" ToolPath="C:\Program Files\Subversion\bin36n" />
-    <Message Text="Detecting SVN Version." />
-    <SvnVersion LocalPath=".." ToolPath="C:\Program Files\svn">
-      <Output TaskParameter="Revision" PropertyName="Revision" />
-    </SvnVersion>
-    <Message Text="Detected SVN Version: 0.2.$(Revision)" />
-    <AssemblyInfo CodeLanguage="CS" OutputFile="Properties/AssemblyInfo.cs" AssemblyTitle="Softrope" AssemblyDescription="Sofrope" AssemblyCompany="http://www.teknohippy.net/" AssemblyProduct="Softrope" AssemblyCopyright="Copyright © teknohippy.net 2008" ComVisible="false" CLSCompliant="true" AssemblyVersion="0.2.$(Revision)" AssemblyFileVersion="0.2.$(Revision)" Condition="$(Revision) != '0' " />
-    <Message Text="Written AssemblyInfo.cs" />
+	  
   </Target>
   <Target Name="AfterBuild" Condition="'$(Configuration)'=='Release'">
    
