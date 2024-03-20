@@ -39,8 +39,9 @@ namespace SoftropeGui
             VolumeSlider.Value = SoundEffect.SoundEffectVolume;
             PreDelayCheckBox.IsChecked = SoundEffect.PreDelay;
             LoopCheckBox.IsChecked = SoundEffect.IsLooping;
+            int temp = SoundEffect.LoopGap; //following line invokes ChangeLoopText which sets LoopGap
             SliderHigh.Value = SoundEffect.LoopGap + SoundEffect.LoopGapVariance;
-            SliderLow.Value = SoundEffect.LoopGap;
+            SliderLow.Value = temp;
             SequentialCheckBox.IsChecked = SoundEffect.IsPlayList;
             ChangeLoopText();
             foreach (Sample sample in SoundEffect.Samples)
