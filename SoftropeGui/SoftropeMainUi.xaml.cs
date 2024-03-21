@@ -79,7 +79,21 @@ namespace SoftropeGui
             }
         }
 
-        private void Test_Click(object sender, RoutedEventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Module.FileName == "")
+            {
+                SaveAsButton_Click(sender, e);
+            }
+            else
+            {
+                Softrope.Save(Module, Module.FileName);
+                MessageBox.Show("Saved");
+                Module.IsDirty = false;
+            }
+        }
+
+        private void SaveAsButton_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Save();
 
@@ -96,7 +110,7 @@ namespace SoftropeGui
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog openFd = new Microsoft.Win32.OpenFileDialog();
             openFd.InitialDirectory = Properties.Settings.Default.LastSavePath;

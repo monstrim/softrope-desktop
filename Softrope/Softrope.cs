@@ -24,6 +24,7 @@ namespace Teknohippy.Softrope
 
         public static void Save(Module module, string path)
         {
+            module.FileName = path;
             XmlSerializer serializer = new XmlSerializer(typeof(Module));
             FileStream fs = new FileStream(path, FileMode.Create);
             TextWriter writer = new StreamWriter(fs, new UTF8Encoding());
@@ -37,6 +38,7 @@ namespace Teknohippy.Softrope
             XmlSerializer serializer = new XmlSerializer(typeof(Module));
             FileStream fs = new FileStream(path, FileMode.Open);
             module = (Module)serializer.Deserialize(fs);
+            module.FileName = path;
             fs.Close();
             return module;            
         }

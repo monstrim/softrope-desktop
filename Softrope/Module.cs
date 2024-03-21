@@ -19,6 +19,7 @@ namespace Teknohippy.Softrope
         {
             Scenes = new BindingList<Scene>();
             IsDirty = true;
+            FileName = "";
             Scenes.ListChanged += new ListChangedEventHandler(Scenes_ListChanged);
             ModuleMixerChannel = BassMix.BASS_Mixer_StreamCreate(44100, 2,
                 BASSFlag.BASS_MIXER_NONSTOP |
@@ -42,6 +43,9 @@ namespace Teknohippy.Softrope
 
         [XmlIgnoreAttribute]
         public bool IsDirty { get; set; }
+
+        [XmlIgnoreAttribute]
+        public string FileName { get; set; }
 
         void Scenes_ListChanged(object sender, ListChangedEventArgs e)
         {
