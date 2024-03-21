@@ -36,7 +36,9 @@ namespace Teknohippy.Softrope
         {
             XmlSerializer serializer = new XmlSerializer(typeof(Module));
             FileStream fs = new FileStream(path, FileMode.Open);
-            return serializer.Deserialize(fs) as Module;            
+            module = (Module)serializer.Deserialize(fs);
+            fs.Close();
+            return module;            
         }
 
         public static void SaveSceneZip(Scene scene, string path)
