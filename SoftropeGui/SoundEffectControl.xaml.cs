@@ -11,6 +11,7 @@ using Teknohippy.Softrope;
 using System.Windows.Threading;
 using SoftropeGui.Properties;
 using System.Windows.Input;
+using System.Collections.Generic;
 
 namespace SoftropeGui
 {
@@ -57,12 +58,14 @@ namespace SoftropeGui
 
         }
 
-        private void CreateSampleControl(SoundEffect soundEffect, Sample sample)
+        private SampleControl CreateSampleControl(SoundEffect soundEffect, Sample sample)
         {
             SampleControl sampleControl = new SampleControl(sample, soundEffect);
             SamplesStackPanel.Children.Add(sampleControl);
             sampleControl.Removed += new EventHandler(sampleControl_Removed);
             sampleControl.LoadingSample += new EventHandler(sampleControl_LoadingSample);
+
+            return sampleControl;
         }
 
         void sampleControl_LoadingSample(object sender, EventArgs e)
@@ -326,11 +329,30 @@ namespace SoftropeGui
         {
             SampleControl dropsc = e.Source as SampleControl;
             DragData scdrag = e.Data.GetData("DragData") as DragData;
-            SampleControl sc = scdrag.sampleControl;
-            if (dropsc == null)
+            if (scdrag != null)
             {
-                SamplesStackPanel.Children.Add(sc);
-                SoundEffect.Samples.Add(sc.Sample);
+                SampleControl sc = scdrag.sampleControl;
+                if (dropsc == null)
+                {
+                    SamplesStackPanel.Children.Add(sc);
+                    SoundEffect.Samples.Add(sc.Sample);
+                }
+            }
+            else if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                foreach (string file in files)
+                {
+                    var ext = System.IO.Path.GetExtension(file);
+                    if((new List<string> {".wav",".mp3",".wma",".ogg",".mp1",".mp2",".aiff"}).Contains(ext))
+                    {
+                        Sample sample = new Sample();
+                        SampleControl sc = CreateSampleControl(SoundEffect, sample);
+                        SoundEffect.Samples.Add(sample);
+                        sample.FileName = file;
+                        sc.SampleNameText.Text = System.IO.Path.GetFileName(file);
+                    }
+                }
             }
         }
 
@@ -338,24 +360,27 @@ namespace SoftropeGui
         {
             SampleControl dropsc = e.Source as SampleControl;
             DragData scdrag = e.Data.GetData("DragData") as DragData;
-            SampleControl sc = scdrag.sampleControl;
-
-            if (dropsc != null && dropsc != sc)
+            if (scdrag != null)
             {
-                Int32 dropIndex = dropIndex = SamplesStackPanel.Children.IndexOf(dropsc);
+                SampleControl sc = scdrag.sampleControl;
 
-                try
+                if (dropsc != null && dropsc != sc)
                 {
-                    scdrag.soundEffectControl.SamplesStackPanel.Children.Remove(sc);
-                    scdrag.soundEffectControl.SoundEffect.Samples.Remove(sc.Sample);
-                }
-                catch (Exception ex)
-                {
-                    LoopStatus.Text = ex.Message;
-                }
+                    Int32 dropIndex = SamplesStackPanel.Children.IndexOf(dropsc);
 
-                SamplesStackPanel.Children.Insert(dropIndex, sc);
-                SoundEffect.Samples.Insert(dropIndex, sc.Sample);
+                    try
+                    {
+                        scdrag.soundEffectControl.SamplesStackPanel.Children.Remove(sc);
+                        scdrag.soundEffectControl.SoundEffect.Samples.Remove(sc.Sample);
+                    }
+                    catch (Exception ex)
+                    {
+                        LoopStatus.Text = ex.Message;
+                    }
+
+                    SamplesStackPanel.Children.Insert(dropIndex, sc);
+                    SoundEffect.Samples.Insert(dropIndex, sc.Sample);
+                }
             }
         }
 
