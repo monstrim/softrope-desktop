@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © teknohippy.net 2008")]
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]
-[assembly: AssemblyVersion("0.3.01")]
-[assembly: AssemblyFileVersion("0.3.01")]
+[assembly: AssemblyVersion("0.3.02")]
+[assembly: AssemblyFileVersion("0.3.02")]
 
 

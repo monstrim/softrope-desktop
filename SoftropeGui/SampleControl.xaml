@@ -3,7 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" xmlns:SoftropeGui="clr-namespace:SoftropeGui"
 	x:Class="SoftropeGui.SampleControl"
-	x:Name="UserControl" Width="500" Height="32" HorizontalAlignment="Right" Margin="0,4,0,0" Background="#FF000000">
+	x:Name="UserControl" Width="650" Height="32" HorizontalAlignment="Right" Margin="0,4,0,0" Background="#FF000000">
 	<UserControl.Resources>
 		<LinearGradientBrush x:Key="HorizontalSliderThumbHoverBackgroundInverted" EndPoint="0,0" StartPoint="0,1">
 			<GradientStop Color="white" Offset="0"/>
@@ -622,10 +622,10 @@
 				</LinearGradientBrush>
 			</Rectangle.Fill>
 		</Rectangle>
-		<TextBox HorizontalAlignment="Right" Margin="0,4,306,4" Width="132.553" Text="TextBox" TextWrapping="NoWrap" x:Name="SampleNameText" TextChanged="SampleNameText_TextChanged" Background="#FFCFD5B4" BorderBrush="#FF000000" VerticalAlignment="Stretch" MaxLines="1"/>
+		<TextBox HorizontalAlignment="Right" Margin="0,4,306,4" Width="282.553" Text="TextBox" TextWrapping="NoWrap" x:Name="SampleNameText" TextChanged="SampleNameText_TextChanged" Background="#FFCFD5B4" BorderBrush="#FF000000" VerticalAlignment="Stretch" MaxLines="1"/>
 		<SoftropeGui:TooltipSlider AutoToolTipPrecision="2" Margin="0,5,32,3" x:Name="SampleWeightSlider" LargeChange="0.1" SmallChange="0.01" Maximum="1" Value="1" HorizontalAlignment="Right" Style="{DynamicResource BottomSlider}" ToolTip="Slide to set the probability of this sample being chosen randomly." SnapsToDevicePixels="True" Width="137.447" AutoToolTipPlacement="TopLeft" ValueChanged="SampleWeightSlider_ValueChanged" MouseLeftButtonUp="SampleWeightSlider_MouseLeftButtonUp"/>
 		<Button HorizontalAlignment="Right" Content="" Width="24" Margin="0,4,4,4" x:Name="DeleteSampleButton" Click="DeleteSampleButton_Click" Height="24" Style="{DynamicResource CloseButtonStyle}"/>
-		<Button HorizontalAlignment="Right" Margin="0,4,442,4" Width="24" Content="" x:Name="OpenSampleButton" Click="OpenSampleButton_Click" ToolTip="Load new file into sample." Style="{DynamicResource OpenButtonStyle}"/>
+		<Button HorizontalAlignment="Right" Margin="0,4,592,4" Width="24" Content="" x:Name="OpenSampleButton" Click="OpenSampleButton_Click" ToolTip="Load new file into sample." Style="{DynamicResource OpenButtonStyle}"/>
 		<Slider Template="{DynamicResource SliderControlTemplate1}" Style="{DynamicResource SliderStyle}" Cursor="Arrow" RenderTransformOrigin="0.493,0.417" TickPlacement="None" Maximum="1" SmallChange="0.01" x:Name="SampleVolumeSlider" Visibility="Visible" TabIndex="101" Margin="0,5,171,3" Value="1" ToolTip="Adjust the volume of your sound effect." TickFrequency="0.01" IsMoveToPointEnabled="True" LargeChange="0.1" ValueChanged="SampleVolumeSlider_ValueChanged" SnapsToDevicePixels="True" HorizontalAlignment="Right" Width="128"/>
 		
 		

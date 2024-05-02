@@ -286,7 +286,7 @@ namespace SoftropeGui
 
         private void SamplesStackPanel_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            if (e.OriginalSource != ((SampleControl)e.Source).ChannelBG_Copy)
+            if (e.Source is SampleControl && e.OriginalSource != ((SampleControl)e.Source).ChannelBG_Copy)
             {
                 return;
             }
@@ -298,7 +298,7 @@ namespace SoftropeGui
 
                 if (Math.Abs(dragVector.Length) > 5)
                 {
-                    SampleControl sampleControl = e.Source as SampleControl;
+                        SampleControl sampleControl = e.Source as SampleControl;
                     if (sampleControl != null)
                     {
                         DragData dragData = new DragData();
@@ -358,15 +358,21 @@ namespace SoftropeGui
 
         private void SamplesStackPanel_DragOver(object sender, DragEventArgs e)
         {
-            SampleControl dropsc = e.Source as SampleControl;
-            DragData scdrag = e.Data.GetData("DragData") as DragData;
-            if (scdrag != null)
+            if (e.Data.GetData("DragData") is DragData scdrag)
             {
                 SampleControl sc = scdrag.sampleControl;
+                Int32 dropIndex = -1;
 
-                if (dropsc != null && dropsc != sc)
+                if (e.Source is SampleControl dropsc && dropsc != sc)
                 {
-                    Int32 dropIndex = SamplesStackPanel.Children.IndexOf(dropsc);
+                    dropIndex = SamplesStackPanel.Children.IndexOf(dropsc);
+                }
+                else if (e.Source is StackPanel dropstack && dropstack.Name == "DummyDropPanel" && !SamplesStackPanel.Children.Contains(sc))
+                {
+                    dropIndex = SamplesStackPanel.Children.Count;
+                }
+
+                if (dropIndex >= 0) { 
 
                     try
                     {

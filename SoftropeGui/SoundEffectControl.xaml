@@ -1327,9 +1327,11 @@
 			<TextBlock Height="15" Text="No looping." TextWrapping="Wrap" Margin="0,0,51.808,2" Foreground="#FFDFDFDF" FontFamily="Candara" FontSize="11" x:Name="LoopStatus" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="244"/>
 			
 		</Grid>
-		<StackPanel Width="656" Height="Auto">
-			<StackPanel x:Name="SamplesStackPanel" Width="656" Height="Auto" DragEnter="SamplesStackPanel_DragEnter" DragOver="SamplesStackPanel_DragOver" Drop="SamplesStackPanel_Drop" AllowDrop="True" PreviewMouseLeftButtonDown="SamplesStackPanel_PreviewMouseLeftButtonDown" PreviewMouseMove="SamplesStackPanel_PreviewMouseMove"/>
-		</StackPanel>
-		<Button Content="" Width="24" x:Name="AddSampleButton" Click="AddSampleButton_Click" ToolTip="Add new sample to sound effect." Height="24" Style="{DynamicResource AddSampleButton}" Margin="0,4,4,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-	</StackPanel>
+        <StackPanel Width="656" Height="Auto" DragEnter="SamplesStackPanel_DragEnter" DragOver="SamplesStackPanel_DragOver" Drop="SamplesStackPanel_Drop" AllowDrop="True" PreviewMouseLeftButtonDown="SamplesStackPanel_PreviewMouseLeftButtonDown" PreviewMouseMove="SamplesStackPanel_PreviewMouseMove">
+			<StackPanel x:Name="SamplesStackPanel" Width="656" Height="Auto"/>
+            <StackPanel x:Name="DummyDropPanel" Background="Transparent">
+                <Button Content="" Width="24" x:Name="AddSampleButton" Click="AddSampleButton_Click" ToolTip="Add new sample to sound effect." Height="24" Style="{DynamicResource AddSampleButton}" Margin="0,4,4,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
 </UserControl>

@@ -107,6 +107,7 @@ namespace SoftropeGui
                 MessageBox.Show("Saved");
                 Module.IsDirty = false;
                 Properties.Settings.Default.LastSavePath = System.IO.Path.GetDirectoryName(saveFd.FileName);
+                Title = System.IO.Path.GetFileNameWithoutExtension(saveFd.FileName) + " - Softrope";
             }
         }
 
@@ -128,6 +129,7 @@ namespace SoftropeGui
             Module = Softrope.Load(Module, fileName);
             SyncUi();
             Properties.Settings.Default.LastSavePath = System.IO.Path.GetDirectoryName(fileName);
+            Title = System.IO.Path.GetFileNameWithoutExtension(fileName) + " - Softrope";
         }
 
         private void SyncUi()
