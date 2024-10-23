@@ -66,6 +66,16 @@ namespace Teknohippy.Softrope
             }
         }
 
+        public event EventHandler PlayingSample;
+
+        protected virtual void OnPlayingSample(EventArgs e)
+        {
+            if (PlayingSample != null)
+            {
+                PlayingSample(this, e);
+            }
+        }
+
         public event EventHandler Stopping;
 
         protected virtual void OnStopping(EventArgs e)
@@ -200,7 +210,7 @@ namespace Teknohippy.Softrope
         public int Level
         {
             get
-            {                
+            {
                 if (gapTimer.Enabled || CurrentSample == null)
                 {
                     return 0;
@@ -213,7 +223,7 @@ namespace Teknohippy.Softrope
                 level = (int)(level / 3276.8);
                 return level;
 
-                
+
             }
 
         }
@@ -326,6 +336,7 @@ namespace Teknohippy.Softrope
             gapTimer.Stop();
             OnStopping(EventArgs.Empty);
             CurrentSample = null;
+            OnEnded(EventArgs.Empty);
         }
 
         private void EndSync(int handle, int channel, int data, IntPtr user)
@@ -366,7 +377,23 @@ namespace Teknohippy.Softrope
             {
                 BassMix.BASS_Mixer_ChannelSetPosition(CurrentSample.Channel, 0);
             }
-            BassMix.BASS_Mixer_ChannelPlay(CurrentSample.Channel);
+
+            if (BassMix.BASS_Mixer_ChannelPlay(CurrentSample.Channel))
+            {
+                OnPlayingSample(EventArgs.Empty);
+            }
+            else
+            {
+                BassMix.BASS_Mixer_ChannelPause(CurrentSample.Channel);
+                CurrentSample.isMissing = true;
+                OnEnded(EventArgs.Empty);
+
+                // Gets into a loop when all files missing (such as new scene)
+                // TODO: check for missing file when getting next sound file
+                // to enable this functionality
+                // GetNextSoundFile(true);
+                // PlayCurrentSample(false);
+            }
         }
 
         public void Next()

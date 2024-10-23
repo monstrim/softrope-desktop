@@ -94,12 +94,20 @@
     						<ControlTemplate.Triggers>
     							<Trigger Property="IsFocused" Value="True"/>
     							<Trigger Property="IsDefaulted" Value="True"/>
-    							<Trigger Property="IsMouseOver" Value="True"/>
-    							<Trigger Property="IsPressed" Value="True">
-    								<Setter Property="Fill" TargetName="Light" Value="#77FFFC00"/>
-    								<Setter Property="Visibility" TargetName="Light" Value="Visible"/>
-    							</Trigger>
-    							<Trigger Property="IsEnabled" Value="False"/>
+                                <Trigger Property="IsMouseOver" Value="True"/>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Fill" TargetName="Light" Value="#77FFFC00"/>
+                                    <Setter Property="Visibility" TargetName="Light" Value="Visible"/>
+                                </Trigger>
+                                <Trigger Property="IsDefault" Value="True">
+                                    <Setter Property="Fill" TargetName="Light" Value="#7700FF00"/>
+                                    <Setter Property="Visibility" TargetName="Light" Value="Visible"/>
+                                </Trigger>
+                                <Trigger Property="IsCancel" Value="True">
+                                    <Setter Property="Fill" TargetName="Light" Value="#77FF0000"/>
+                                    <Setter Property="Visibility" TargetName="Light" Value="Visible"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False"/>
     						</ControlTemplate.Triggers>
     					</ControlTemplate>
     				</Setter.Value>

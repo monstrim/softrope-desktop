@@ -12,6 +12,7 @@ namespace Teknohippy.Softrope
             Name = "No sample loaded...";
             Volume = 1;
             Weight = 1;
+            isMissing = false;
         }
 
         #region SoundFile Members
@@ -30,6 +31,7 @@ namespace Teknohippy.Softrope
             set
             {
                 fileName = value;
+                isMissing = false;
                 OnLoadingFile(EventArgs.Empty);
             }
         }
@@ -50,6 +52,8 @@ namespace Teknohippy.Softrope
         public float Weight { get; set; }        
 
         public string Name { get; set; }
+
+        public bool isMissing { get; set; }
 
         #endregion SoundFile Properties
 

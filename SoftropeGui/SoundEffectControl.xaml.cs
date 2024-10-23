@@ -23,6 +23,8 @@ namespace SoftropeGui
             SoundEffect = soundEffect;
             SliderHigh.Maximum = Settings.Default.MaximumLoop;
             SliderLow.Maximum = Settings.Default.MaximumLoop;
+            SoundEffect.PlayingSample += new EventHandler(PlayingSample);
+            SoundEffect.Ended += new EventHandler(Ended);
 
             LoadSoundEffect();
         }
@@ -55,7 +57,37 @@ namespace SoftropeGui
                 SoundEffect.Samples.Add(sample);
                 CreateSampleControl(SoundEffect, sample);
             }
+        }
 
+        void PlayingSample(object sender, EventArgs e)
+        {
+            SoundEffect.PlayingSample -= new EventHandler(PlayingSample);
+            this.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
+            {
+                foreach (SampleControl sampleControl in SamplesStackPanel.Children)
+                {
+                    // using IsDefault style to signalize playing sample
+                    // TODO: implement custom property
+                    sampleControl.OpenSampleButton.IsDefault = (sampleControl.Sample == SoundEffect.CurrentSample);
+                    sampleControl.OpenSampleButton.IsCancel = sampleControl.Sample.isMissing;
+                }
+            }));
+            SoundEffect.PlayingSample += new EventHandler(PlayingSample);
+        }
+
+        void Ended(object sender, EventArgs e)
+        {
+            SoundEffect.Ended -= new EventHandler(Ended);
+            this.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
+            {
+                foreach (SampleControl sampleControl in SamplesStackPanel.Children)
+                {
+                    // using IsDefault style to signalize playing sample
+                    // TODO: implement custom property
+                    sampleControl.OpenSampleButton.IsDefault = false;
+                }
+            }));
+            SoundEffect.Ended += new EventHandler(Ended);
         }
 
         private SampleControl CreateSampleControl(SoundEffect soundEffect, Sample sample)
