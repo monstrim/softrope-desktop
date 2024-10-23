@@ -76,8 +76,8 @@
     </UserControl.Triggers>
 
     <Grid>
-        <Grid Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="True">
-            <ToggleButton x:Name="PlayStopButton" Unchecked="PlayStopButton_Unchecked" Checked="PlayStopButton_Checked" Margin="0,0,0,16" BorderThickness="0,0,0,0" Style="{DynamicResource SceneButton}" Content="" IsThreeState="False" d:LayoutOverrides="Width, Height" HorizontalAlignment="Stretch" VerticalAlignment="Center" Click="PlayStopButton_Click" PreviewMouseDoubleClick="PlayStopButton_PreviewMouseDoubleClick">
+        <Grid Margin="12,12,12,0" VerticalAlignment="Top" HorizontalAlignment="Center" IsEnabled="True">
+            <ToggleButton x:Name="PlayStopButton" Unchecked="PlayStopButton_Unchecked" Checked="PlayStopButton_Checked" Margin="0,0,0,0" BorderThickness="0,0,0,0" Style="{DynamicResource SceneButton}" Content="" IsThreeState="False" d:LayoutOverrides="Width, Height" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="PlayStopButton_Click" PreviewMouseDoubleClick="PlayStopButton_PreviewMouseDoubleClick">
                 <ToggleButton.ContextMenu>
                     <ContextMenu Opened="ContextMenu_Opened">
                         <MenuItem x:Name="EditSceneMenuItem" Header="Edit Scene" Click="EditSceneMenuItem_Click"/>
@@ -89,7 +89,7 @@
                     </ContextMenu>
                 </ToggleButton.ContextMenu>
             </ToggleButton>
-            <TextBox VerticalAlignment="Bottom" Text="New Scene" TextWrapping="WrapWithOverflow" x:Name="SceneNameTextBox" FontSize="9" TextAlignment="Center" FontWeight="Normal" FontFamily="Neo Sans Std" d:IsStaticText="True" BorderThickness="0,0,0,0" Margin="0,0,0,0" Background="{x:Null}" Foreground="#FFFFFFFF" MaxLines="1" MaxWidth="72" Padding="0,0,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" TextChanged="SceneNameTextBox_TextChanged" d:LayoutOverrides="Width" IsHitTestVisible="True"/>
+            <TextBox VerticalAlignment="Top" Text="Unnamed Scene" TextWrapping="WrapWithOverflow" x:Name="SceneNameTextBox" FontSize="9" TextAlignment="Center" FontWeight="Normal" FontFamily="Neo Sans Std" d:IsStaticText="True" BorderThickness="0,0,0,0" Margin="-5,68,-5,0" Background="{x:Null}" Foreground="#FFFFFFFF" MaxLines="1" MaxWidth="72" Padding="0,0,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" TextChanged="SceneNameTextBox_TextChanged" d:LayoutOverrides="Width" IsHitTestVisible="True" Height="22"/>
 
         </Grid>
         <Path Fill="{x:Null}" Stretch="Fill" HorizontalAlignment="Left" Margin="-1,8,0,8" Width="2" Data="M7,6 L7,94" x:Name="LeftLine" Visibility="Hidden" StrokeThickness="2" Stroke="#FF7D7D7D"/>
